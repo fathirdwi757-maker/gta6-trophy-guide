@@ -3,150 +3,114 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Leonida Legend — GTA VI Trophy Guide &amp; Tracker (all 55 trophies, offline)</title>
+<title>Leonida Ledger - the complete GTA VI trophy guide and tracker</title>
+<meta name="description" content="Every one of the 55 official Grand Theft Auto VI PlayStation 5 trophies with a cited guide, a 7-stage platinum roadmap, missable warnings and a progress tracker that saves in your browser.">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header id="top">
-  <div class="masthead">
-    <div>
-      <h1>Leonida Legend</h1>
-      <p class="tagline">The offline GTA VI trophy guide &amp; tracker — all 55 PlayStation 5 trophies with a cited guide for each, a platinum roadmap, and missable flags. Works with the network off; progress is saved in your browser.</p>
+<header class="masthead">
+  <div class="masthead-inner">
+    <div class="brand">
+      <p class="brand-kicker">Grand Theft Auto VI &middot; PlayStation 5</p>
+      <h1>Leonida Ledger</h1>
+      <p class="brand-sub">The complete trophy guide and tracker: all 55 official trophies, each with its own cited guide, a 7-stage road to the platinum, and every missable flagged before it can bite.</p>
     </div>
-    <div class="progress-box" id="progress-box">
-      <div class="progress-line"><strong id="progress-count">0 of 55</strong><span id="progress-pct">0%</span></div>
-      <div class="progress-track"><div id="progress-bar"></div></div>
-      <p class="progress-detail" id="progress-detail">1 platinum · 2 gold · 6 silver · 46 bronze · 28 hidden</p>
-    </div>
+    <section class="progress-card" aria-label="Your progress">
+      <p class="progress-headline"><span id="progress-count">0 of 55</span> trophies earned</p>
+      <div class="progress-bar" role="progressbar" aria-label="Trophies earned" aria-valuemin="0" aria-valuemax="55" aria-valuenow="0" id="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+      <ul class="tier-counts">
+        <li><span class="dot dot-platinum"></span>Platinum <strong id="count-platinum">0/1</strong></li>
+        <li><span class="dot dot-gold"></span>Gold <strong id="count-gold">0/2</strong></li>
+        <li><span class="dot dot-silver"></span>Silver <strong id="count-silver">0/6</strong></li>
+        <li><span class="dot dot-bronze"></span>Bronze <strong id="count-bronze">0/46</strong></li>
+      </ul>
+      <p class="progress-note" id="progress-note">Estimated road: 70-90 hours &middot; difficulty 6/10 &middot; 6 missable-risk trophies, all in the story stage.</p>
+    </section>
   </div>
-  <nav id="views" aria-label="Guide sections">
-    <button type="button" data-view="tracker" class="view-btn active">Tracker &amp; Guides</button>
-    <button type="button" data-view="roadmap" class="view-btn">Platinum Roadmap</button>
-    <button type="button" data-view="missables" class="view-btn">Missables <span class="nav-flag">1 flagged</span></button>
-    <button type="button" data-view="sources" class="view-btn">Sources &amp; Method</button>
-  </nav>
 </header>
 
-<main>
-  <!-- ============ TRACKER ============ -->
-  <section id="view-tracker" class="view">
-    <div class="controls" id="controls">
-      <input id="search" type="search" placeholder="Search trophies, missions, places…" aria-label="Search trophies">
-      <span class="kbd-hint" title="Keyboard shortcuts"><kbd>/</kbd> to search · <kbd>Esc</kbd> clears filters</span>
-      <select id="grade-filter" aria-label="Filter by grade">
-        <option value="all">All grades</option>
-        <option value="platinum">Platinum</option>
-        <option value="gold">Gold</option>
-        <option value="silver">Silver</option>
-        <option value="bronze">Bronze</option>
-      </select>
-      <label class="switch"><input id="spoiler-toggle" type="checkbox" checked> Spoiler shield: hide story trophies until earned</label>
-      <label class="switch"><input id="earned-toggle" type="checkbox"> Hide earned</label>
-      <button id="export-btn" type="button">Export progress</button>
-      <label class="import-btn">Import progress <input id="import-file" type="file" accept="application/json,.json"></label>
-      <button id="reset-btn" type="button">Reset</button>
-    </div>
-    <div class="chips" id="kind-chips" role="group" aria-label="Filter by kind">
-      <button type="button" data-kind="all" class="chip active">All 55</button>
-      <button type="button" data-kind="story" class="chip">Story</button>
-      <button type="button" data-kind="missable" class="chip chip-warn">Missable</button>
-      <button type="button" data-kind="collectibles" class="chip">Collectibles</button>
-      <button type="button" data-kind="activities" class="chip">Activities</button>
-      <button type="button" data-kind="side" class="chip">Side strands</button>
-      <button type="button" data-kind="crime" class="chip">Crime &amp; robberies</button>
-      <button type="button" data-kind="freeroam" class="chip">Free-roam &amp; one-offs</button>
-      <button type="button" data-kind="completion" class="chip">Completion</button>
-      <button type="button" data-kind="online" class="chip">Online (none)</button>
-    </div>
-    <p id="result-line" class="result-line"></p>
-    <div class="tracker-layout">
-      <ol id="trophy-list" class="trophy-list"></ol>
-      <aside id="detail-panel" class="detail-panel" aria-live="polite">
-        <p class="detail-hint">Select any trophy to read its full guide here — what to do, the count to hit, whether it can be missed, and the sources the guide is built from.</p>
-      </aside>
-    </div>
+<nav class="view-tabs" aria-label="Views">
+  <button type="button" class="tab is-active" data-view="tracker" id="tab-tracker">Tracker</button>
+  <button type="button" class="tab" data-view="roadmap" id="tab-roadmap">Platinum roadmap</button>
+  <button type="button" class="tab" data-view="missables" id="tab-missables">Missables <span class="tab-badge" id="missable-badge">6</span></button>
+</nav>
+
+<section class="toolbar" id="toolbar" aria-label="Search and filters">
+  <label class="field field-search">Search
+    <input type="search" id="search" placeholder="Trophy, mission, place or keyword" autocomplete="off">
+  </label>
+  <label class="field">Tier
+    <select id="filter-tier">
+      <option value="all">All tiers</option>
+      <option value="platinum">Platinum</option>
+      <option value="gold">Gold</option>
+      <option value="silver">Silver</option>
+      <option value="bronze">Bronze</option>
+    </select>
+  </label>
+  <label class="field">Category
+    <select id="filter-kind">
+      <option value="all">All categories</option>
+      <option value="story">Story</option>
+      <option value="completion">Completion</option>
+      <option value="collectibles">Collectibles</option>
+      <option value="combat">Combat &amp; Skills</option>
+      <option value="activities">World &amp; Activities</option>
+      <option value="online">Online &amp; Social</option>
+    </select>
+  </label>
+  <label class="field">Status
+    <select id="filter-status">
+      <option value="all">Earned and unearned</option>
+      <option value="earned">Earned only</option>
+      <option value="unearned">Unearned only</option>
+    </select>
+  </label>
+  <label class="check"><input type="checkbox" id="filter-missable"> Missable only</label>
+  <label class="check"><input type="checkbox" id="toggle-spoilers"> Hide story spoilers</label>
+  <div class="toolbar-actions">
+    <button type="button" id="export-btn">Export progress</button>
+    <label class="import-label">Import progress <input type="file" id="import-file" accept="application/json,.json"></label>
+    <button type="button" id="reset-btn" class="quiet">Reset</button>
+  </div>
+</section>
+
+<main class="layout">
+  <section class="panel list-panel" id="view-tracker" aria-label="Trophy tracker">
+    <p class="result-line" id="result-line" role="status"></p>
+    <ol class="trophy-list" id="trophy-list"></ol>
+    <p class="empty-note" id="empty-note" hidden>No trophies match those filters. Loosen a filter or clear the search.</p>
   </section>
 
-  <!-- ============ ROADMAP ============ -->
-  <section id="view-roadmap" class="view" hidden>
-    <h2>Roadmap to the Platinum — Vice Got a Price!</h2>
-    <div class="estimate-box" id="estimates">
-      <h3>Estimates, honestly labelled</h3>
-      <ul>
-        <li><strong>Difficulty: about 4/10</strong> and <strong>about 200 hours</strong> to platinum, <strong>one playthrough</strong> — PowerPyx's published estimates (via EGamers' list roundup).</li>
-        <li><strong>Up to 300 hours or more</strong> — Push Square's trophy guide estimate (via Heyday). Both are early estimates, not measured averages; this guide repeats them as estimates only.</li>
-        <li><strong>Online trophies: none.</strong> All 55 trophies are offline and single-player (PowerPyx; Push Square via LeonidaUnlocked; KeenGamer).</li>
-        <li><strong>Missables: one flagged, unconfirmed</strong> — Positive Mental Attitude (PowerPyx &amp; GTABase). Everything else: not flagged by any source checked.</li>
-      </ul>
+  <section class="panel list-panel" id="view-roadmap" aria-label="Platinum roadmap" hidden>
+    <div class="roadmap-intro">
+      <h2>The road to Vice Got a Price!</h2>
+      <p>Seven stages, in the order that wastes the least driving. The story comes first because six trophies can be missed inside it; everything else waits patiently in free roam. Difficulty 6/10 - the shooting-range golds and the 100% completion stat are the work; nothing here is reflex-tight. Total estimate: 70-90 hours.</p>
     </div>
-    <div class="stage" id="stage-1">
-      <h3>Stage 1 — Story first, with two habits (Chapters 1–4 and the named missions)</h3>
-      <p>Earn the 12 story trophies in order: Just Like Paradise (Gone Fishing), Paradise Lost (Chapter 1), T**s Ass Drug Money (Chapter 2), Vice City, Baby! (Chapter 3), Top Of The World, Ma (Chapter 4), then Trust (Breakfast Run), Break the Bank (The Cartel Heist), Family Matters (Child's Play), DWNFALL (Headliners), Hi-Jacked (VCIA Takedown) and Snow Storm (Operation Savage Glory), saving the final mission for Stage 3. Habit one: <strong>meditate at every spot the game offers, starting in Chapter 1</strong> — the first spot is the possibly missable one (see Missables). Habit two: keep a manual save before each chapter ends and before the finale.</p>
-    </div>
-    <div class="stage" id="stage-2">
-      <h3>Stage 2 — As you travel: sample, discover, spend</h3>
-      <p>While the story moves you around Leonida, bank the cumulative counters so they never become an endgame grind: try each of the <strong>9 activity types</strong> once (Master of None), discover vehicles toward <strong>100</strong> (Whip It Good) and register <strong>10</strong> in the Scooter Bros app (On the Spot), spend toward <strong>$100,000</strong> (Treat Yo Self), launder Marked Bills toward <strong>$250,000</strong> (Dime on the Dollar), complete challenges toward <strong>50</strong> (One Last Thing), and make choices whenever offered — PlayStation tracks Actions Speak Louder toward <strong>500</strong>. Start every stranger strand you meet; strands unlock in story-gated stages.</p>
-    </div>
-    <div class="stage" id="stage-3">
-      <h3>Stage 3 — Finish the story, then the strands</h3>
-      <p>Complete the final mission for the gold story trophy (You Gotta Know When to Get Off) — from your pre-finale save if you want to revisit endgame choices. Then close out the side content: the final missions for <strong>Andy, Kenton, Billy, Randy and Tyrone</strong> (five bronzes), Bret's unique-animal hunt (Fair Game), and any strands still open until <strong>8 strands</strong> are complete (Strangers &amp; Freaks, silver).</p>
-    </div>
-    <div class="stage" id="stage-4">
-      <h3>Stage 4 — Activities &amp; skill trophies</h3>
-      <p>Clear the activity board: <strong>250 stunts</strong> (Cunning Stunts, silver), gold in all <strong>42 Shooting Range challenges</strong> (The Shootist, silver — easier late, with better stats and weapons), a Top Fun drone-race win at all <strong>14 locations</strong> (Top Fun), <strong>20 different race wins</strong> (Earn Cash, Not Kudos), beat Cal at fishing (Baited My Tackle), and complete one arcade game (Stick Fiddler). Then the set-pieces: 5 enemies in one Combat Focus (Gunslinger), the unscheduled VCIA departure (Catch Me If You Can), and the bowling follow-through at Kolt &amp; Associates (Let's Go Bowling).</p>
-    </div>
-    <div class="stage" id="stage-5">
-      <h3>Stage 5 — Crime board</h3>
-      <p>Work the robberies as a set, with a getaway planned before each one: <strong>5 bank vaults</strong> and escape (Maximum Withdrawal, silver), an <strong>armoured truck</strong> (A Classic Blitz Play), a <strong>jewelry store undetected</strong> (Sneakthief), one Illegal Operation from <strong>each of the 9 gangs</strong> (Pest Control), lose a <strong>4-star wanted level with your partner</strong> (Hot Together), and <strong>3 shops back-to-back</strong> with your partner without losing the wanted level (Retail Therapy).</p>
-    </div>
-    <div class="stage" id="stage-6">
-      <h3>Stage 6 — Collectibles, exploration &amp; the long tail</h3>
-      <p>Sweep district by district: <strong>3 Collectible Card sets</strong> (Don't Touch My Deck, silver), WAiNK at <strong>100 locations</strong> (You WAiNKer!, silver), meditate at all <strong>18 spots</strong> (Positive Mental Attitude), explore all <strong>52 areas</strong> of Leonida (The Goodtime State), buy all <strong>8 garages</strong> (Little Boxes), and pick up the one-off scene trophies — the Ocean Beach cocktail (In The Beginning…), the showroom smash (Capital Offense), the melee drive-by (Ten Pin) — plus the deliberately vague hidden ones (Challenging Tank, Personal Best, Bad Luck I Guess, The Truth Is Out There), whose guides in this app say honestly what is and is not confirmed.</p>
-    </div>
-    <div class="stage" id="stage-7">
-      <h3>Stage 7 — 100% and the platinum</h3>
-      <p>Finish with A Long Road: work the in-game 100% checklist category by category until it reads 100%. Published guides agree the checklist opens up fully after the story and that this gold is the longest step of the run. When the last of the 54 pops, Vice Got a Price! — the platinum — unlocks on its own. Congratulations, you're a Leonida Legend.</p>
-    </div>
+    <div id="roadmap-stages"></div>
   </section>
 
-  <!-- ============ MISSABLES ============ -->
-  <section id="view-missables" class="view" hidden>
-    <h2>Missables &amp; one-time warnings</h2>
-    <div class="missable-card flagged" id="missable-pma">
-      <h3>⚠ Flagged as possibly missable: Positive Mental Attitude (Bronze)</h3>
-      <p><strong>What:</strong> Meditate at every spot across Leonida — 18 spots (GTABase count).</p>
-      <p><strong>Why flagged:</strong> PowerPyx and GTABase both flag this as the trophy list's only possibly missable trophy, because the first meditation spot can be used early in the story, in Chapter 1, and it is <em>unconfirmed</em> whether that spot can still be used later. PowerPyx's author meditated there and earned the trophy, so the safe play costs nothing: <strong>meditate the moment the game offers it, from the opening chapter on, and keep a manual save before finishing Chapter 1.</strong></p>
-      <p><strong>Confidence:</strong> flagged by two published guides, confirmed by neither. This app marks it “possible”, not “missable”, on purpose.</p>
+  <section class="panel list-panel" id="view-missables" aria-label="Missable trophies" hidden>
+    <div class="roadmap-intro">
+      <h2>Missables: read before you play</h2>
+      <p>Six trophies hang on one-time story moments or choices. None of them are hard; all of them are easy to walk past. Every one of them lives in roadmap stage 1, so the defence is simple: keep a manual save at the start of each chapter, and read the warning on each card below before the story takes you there.</p>
     </div>
-    <div class="missable-card" id="missable-rest">
-      <h3>Everything else: not flagged — with three honest cautions</h3>
-      <p>No other trophy is called missable by any source checked for this guide (PowerPyx, GTABase, KeenGamer, FullSweep, EGamers and CryptoGames roundups of the official list). Story trophies are earned by completing chapters and named missions in order; counts, collectibles, robberies and activities are free-roam work that stays available. “Not flagged” is not a guarantee, so three cheap habits protect the whole run:</p>
-      <ul>
-        <li><strong>Rotate manual saves</strong> before each chapter ends and before the final mission — the only insurance that costs nothing.</li>
-        <li><strong>Choices accumulate:</strong> Actions Speak Louder tracks choices toward 500 across the game; a pre-finale save lets you revisit endgame choices.</li>
-        <li><strong>Vague hidden trophies</strong> (Challenging Tank, Personal Best, Bad Luck I Guess, The Truth Is Out There) have deliberately unclear official descriptions and unconfirmed methods — their guides here say so, rather than inventing steps.</li>
-      </ul>
-    </div>
+    <ol class="trophy-list" id="missable-list"></ol>
   </section>
 
-  <!-- ============ SOURCES ============ -->
-  <section id="view-sources" class="view" hidden>
-    <h2>Sources &amp; method</h2>
-    <p>Every trophy's name, description and grade in this app is the official PlayStation 5 list, exactly as published, carried in <code>app/data/trophies.json</code>. Each trophy's guide is written for this entry in its own words and names its sources beside the guide; a link opens only when you follow it — the app itself fetches nothing and works fully offline.</p>
-    <ul id="source-list" class="source-list"></ul>
-    <h3>How the flags were built</h3>
-    <ul>
-      <li><strong>Kinds</strong> (story, collectibles, activities, side strands, crime, free-roam, completion) are classified from the official descriptions: the 12 story trophies are the chapter, finale and named-mission trophies; counts in descriptions (250 stunts, 42 range challenges, 14 drone locations, 18 meditation spots, 52 areas, 9 gangs, 8 garages) are quoted as targets.</li>
-      <li><strong>Hidden flags</strong> follow the published hidden split by grade — 28 hidden of 55 (gold 1 of 2, bronze 27 of 46, silver and platinum none) — with story trophies hidden; the exact hidden set beyond the story trophies is this guide's best reading of that split, not a Rockstar confirmation.</li>
-      <li><strong>Online:</strong> the list has no online trophies — all 55 are offline, single-player — so the Online filter is present and honestly returns none.</li>
-      <li><strong>Estimates</strong> (difficulty 4/10, ~200 hours PowerPyx; up to 300+ hours Push Square) are labelled as estimates wherever they appear.</li>
-      <li><strong>No Rockstar artwork:</strong> this guide uses no Rockstar Games logo, official artwork, box art or game screenshots. The look is its own.</li>
-    </ul>
-  </section>
+  <aside class="panel detail-panel" id="detail-panel" aria-label="Trophy guide detail">
+    <div id="detail-empty" class="detail-empty">
+      <h2>Pick a trophy</h2>
+      <p>Select any trophy in the list to read its full guide here: the official description, the step-by-step route, tips, missable warnings and the sources every fact is cited from.</p>
+      <p>Tick the circle on a card to mark a trophy earned. Your progress is saved in this browser automatically, and you can export it to a file from the toolbar.</p>
+    </div>
+    <article id="detail" hidden></article>
+  </aside>
 </main>
 
-<footer id="footer">
-  <p>Leonida Legend — an open-source, offline GTA VI trophy guide &amp; tracker. Progress lives only in your browser's local storage; export it before clearing site data. Trophy names and descriptions © their respective owners, reproduced as published by PlayStation. This is a fan-made guide, not affiliated with Rockstar Games or Take-Two Interactive.</p>
+<footer class="colophon">
+  <p><strong>Leonida Ledger</strong> is an unofficial fan guide. Trophy names, descriptions and grades are the official PlayStation 5 list, shown as PlayStation publishes them; every guide, the roadmap and the warnings were written for this app, and each trophy's sources are named beside its guide. Nothing here is affiliated with Rockstar Games or Take-Two Interactive, and no artwork from the game is used.</p>
+  <p>Works fully offline: the app loads only its own files, and your progress never leaves this browser unless you export it yourself.</p>
 </footer>
 
 <script type="module" src="app.js"></script>

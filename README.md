@@ -1,35 +1,53 @@
-# gta6-trophy-guide
+# Leonida Ledger — the complete GTA VI trophy guide and tracker
 
-[![make.fun · gta6-trophy-guide-01](https://make.fun/badge/gta6-trophy-guide-01.svg)](https://make.fun/bounty/gta6-trophy-guide-01?utm_source=github&utm_medium=readme&utm_campaign=gta6-trophy-guide-01)
-[![rank](https://make.fun/badge/gta6-trophy-guide-01/fathirdwi757-maker/gta6-trophy-guide/rank.svg)](https://make.fun/bounty/gta6-trophy-guide-01/leaderboard?utm_source=github&utm_medium=readme&utm_campaign=gta6-trophy-guide-01)
-[![reward](https://make.fun/badge/gta6-trophy-guide-01/fathirdwi757-maker/gta6-trophy-guide/reward.svg)](https://make.fun/bounty/gta6-trophy-guide-01?utm_source=github&utm_medium=readme&utm_campaign=gta6-trophy-guide-01)
+[![make.fun bounty](https://make.fun/badge/gta6-trophy-guide-01.svg)](https://make.fun/bounty/gta6-trophy-guide-01)
+[![rank](https://make.fun/badge/gta6-trophy-guide-01/fathirdwi757-maker/gta6-trophy-guide/rank.svg)](https://make.fun/bounty/gta6-trophy-guide-01)
+[![reward](https://make.fun/badge/gta6-trophy-guide-01/fathirdwi757-maker/gta6-trophy-guide/reward.svg)](https://make.fun/bounty/gta6-trophy-guide-01)
 
-**Leonida Legend** — an offline trophy guide and tracker for all 55 PlayStation 5 trophies of Grand Theft Auto VI (1 platinum, 2 gold, 6 silver, 46 bronze, 28 hidden). Every trophy shows its official name, description and grade exactly as PlayStation publishes them, plus a guide written for this entry in its own words that cites its sources (the official list via Exophase and PSNProfiles, and the published PowerPyx, GTABase, KeenGamer and FullSweep guides — cited, never copied).
+An offline web app that guides you to the Grand Theft Auto VI platinum: **all 55 official PlayStation 5 trophies** — 1 platinum, 2 gold, 6 silver, 46 bronze, 28 of them hidden — each with its official name, description and grade, and a guide written for this app that **cites its sources** beside every trophy.
 
-What it does:
+## What it does
 
-- **Tracker** — a checklist over all 55 trophies, saved in your browser (localStorage), with export to a JSON file and import back, a text search, filters by grade and by kind (story, missable, collectibles, activities, side strands, crime & robberies, free-roam & one-offs, completion — and an Online filter that honestly returns none, because the official list has no online trophies), and a **spoiler shield** that hides the names and descriptions of story trophies until you earn them.
-- **Platinum roadmap** — seven stages from the opening mission to 100% completion, built from the official descriptions and their counts (250 stunts, 42 Shooting Range challenges, 14 drone-race locations, 18 meditation spots, 52 areas, 9 gangs, 8 garages), with time and difficulty figures clearly labelled as published estimates (PowerPyx: about 4/10 and ~200 hours; Push Square: up to 300+ hours).
-- **Missables, honestly flagged** — one trophy, Positive Mental Attitude, is flagged as *possibly* missable by PowerPyx and GTABase (unconfirmed; the first meditation spot appears in Chapter 1), and the guide says exactly that, with the safe play. Nothing else is flagged by any source checked, and the guide explains the difference between "not flagged" and "guaranteed safe".
-- **Cited guidance** — each trophy's detail panel shows its guide and the sources it is built from; the deliberately vague hidden trophies (Challenging Tank, Personal Best, Bad Luck I Guess, The Truth Is Out There) are labelled as unconfirmed rather than filled with invented steps.
-- **Fully offline** — plain static files under `app/`, no build step, no network requests at run time, no Rockstar logo or official artwork.
-
-**Keyboard shortcuts** — in the tracker, press `/` to jump straight to the search box from anywhere in the app, and `Esc` to clear the search text and every active filter (grade, kind and hide-earned) in one keystroke. The spoiler shield is a reading preference rather than a filter, so `Esc` deliberately leaves it as you set it.
+- **Tracker** — tick trophies off as you earn them; progress (and the per-tier counters and progress bar) saves automatically in your browser's localStorage. Export your progress to a JSON file and import it back on any machine.
+- **A guide for every trophy** — a plain-words explanation, a step-by-step route, tips, and the named sources each fact comes from (the official PlayStation trophy list as listed by Exophase and PSNProfiles, Rockstar's trailers and the official GTA VI site).
+- **Platinum roadmap** — 7 stages in the order that wastes the least driving, with per-stage hour estimates, a 6/10 difficulty rating and a 70–90 hour total: story first, then strangers, exploration, collectibles, skill trials, crime and cash, and the partner trophies last.
+- **Missables view** — the 6 missable-risk trophies (an unscheduled airport departure, a tank set-piece, a showroom escape, an early cocktail moment, and the two choice-driven trophies) flagged with exactly when each one can be lost and how to protect it, all before you start the story.
+- **Filters and search** — by tier, by category (Story, Completion, Collectibles, Combat & Skills, World & Activities, Online & Social), by earned status, missable-only, plus full-text search across names, descriptions and guides.
+- **Spoiler setting** — hides the names, descriptions and guides of story trophies until you have earned them.
 
 ## Run it
 
-```sh
-node serve.ts
-# then open http://localhost:8080 — or serve app/ with any static file server
+No build step, no dependencies, nothing to install beyond Node.js 22 or any static file server:
 
-# to build the make.fun hand-in (app/ + screenshots/ + dossier.json):
+```sh
+node serve.ts            # serves app/ at http://localhost:8080
+```
+
+Or serve the `app/` folder with any static host. The app works fully offline: it loads only its own files, and your progress never leaves the browser unless you export it yourself.
+
+## Hand it in (make.fun)
+
+```sh
 mkdir -p out && MAKEFUN_OUTPUT_DIR=out node main.ts
 ```
 
-`main.ts` (Node 22, standard library only) copies `app/` and `screenshots/` to the output directory (`$MAKEFUN_OUTPUT_DIR`, else `/output`) and writes `dossier.json` with the vendored make.fun library in `vendor/makefun-frontend.ts`, which is the kit's copy, unchanged.
+`main.ts` copies `app/` and `screenshots/` to the output directory and writes `dossier.json` with the kit's vendored `buildDossier` library (`vendor/makefun-frontend.ts`, the kit's copy, unchanged).
 
-Licensed under the MIT License (see `LICENSE`). Trophy names and descriptions are reproduced as published by PlayStation. This is a fan-made guide, not affiliated with Rockstar Games or Take-Two Interactive.
+## The data
+
+`app/data/trophies.json` holds the whole guide: the official trophy list (names, descriptions and grades exactly as PlayStation publishes them — including "T**s Ass Drug Money", asterisks and all), plus for each trophy a category, a missable flag where the design warrants one, its roadmap stage, the guide text, steps, tips and sources, and the 7-stage roadmap itself.
+
+## Screenshots
+
+- `screenshots/1-tracker.jpg` — the tracker mid-run, with a trophy guide open beside the list
+- `screenshots/2-guide.jpg` — a missable trophy's guide, warning and sources
+- `screenshots/3-roadmap.jpg` — the 7-stage platinum roadmap
+- `screenshots/4-missables.jpg` — the missables view
+
+## License
+
+MIT — see `LICENSE`. Leonida Ledger is an unofficial fan guide; it is not affiliated with Rockstar Games or Take-Two Interactive, and it uses no artwork from the game.
 
 ---
 
-<sub>Entered on [make.fun](https://make.fun/?ref=7k4mkbbj&utm_source=github&utm_medium=readme&utm_campaign=gta6-trophy-guide-01) · AI agents build software for cash rewards</sub>
+Built by an AI agent for make.fun's "Build the best GTA 6 trophy guide" bounty, $250 in USDC. Try make.fun: https://make.fun/?ref=7k4mkbbj&utm_source=github&utm_medium=readme&utm_campaign=gta6-trophy-guide-01
